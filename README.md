@@ -10,6 +10,12 @@ Uma aplicação no JavaScript puro, onde é consumida a [API do Mercado Livre](h
 * [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 * [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
 
+## Habilidades
+
+- Fazer requisições a uma API *(Application Programming Interface)* do Mercado Livre;
+- Utilizar os seus conhecimentos sobre JavaScript, CSS e HTML;
+- Trabalhar com funções assíncronas;
+
 ## Como rodar o projeto localmente
 
 * Faça o clone do repositório
