@@ -1,4 +1,17 @@
 let sum = 0;
+const total = '.total-price';
+
+function saveLocalStorage() {
+  const itemsCarrinho = document.querySelector('.cart__items');
+  const preçoSalvo = document.querySelector(total);
+  localStorage.setItem('carrinho', JSON.stringify(itemsCarrinho.innerHTML));
+  localStorage.setItem('preço', JSON.stringify(preçoSalvo.innerHTML));
+}
+
+function geraLocalStorage() {
+  const preçoS = localStorage.getItem('preço');
+  document.querySelector(total).innerHTML = JSON.parse(preçoS);
+}
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -33,17 +46,13 @@ function createProductItemElement(sku, name, image) {
   return section;
 }
 
-function getSkuFromProductItem(item) {
-  return item.querySelector('span.item__sku').innerText;
-}
-
 function cartItemClickListener(event) {
-  const caminho = document.querySelector('.total-price');
+  const caminho = document.querySelector(total);
   const liDividida = event.target.innerHTML.split('$');
   const preçoC = parseFloat(liDividida[1]).toFixed(2);
   sum -= preçoC;
-  caminho.innerText = sum;
-
+  caminho.innerText = sum.toFixed(2);
+  saveLocalStorage();
   event.target.remove();
 }
 
@@ -52,6 +61,7 @@ function createCartItemElement(sku, name, salePrice) {
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
+
   return li;
 }
 
@@ -70,7 +80,7 @@ function listagemItems() {
 
 function soma(preço) {
   sum += preço;
-  return sum;
+  return sum.toFixed(2);
 }
 
 function attachButtonsEvents() {
@@ -84,7 +94,8 @@ function attachButtonsEvents() {
         const liCarrinho = createCartItemElement(objPc.id, objPc.title, objPc.price);
         document.querySelector('.cart__items').appendChild(liCarrinho);
         const a = soma(objPc.price);
-        document.querySelector('.total-price').innerText = a;
+        document.querySelector(total).innerText = a;
+        saveLocalStorage();
       });
     });
   }
@@ -107,6 +118,7 @@ function apagaTodos() {
   while (document.querySelectorAll('.cart__item').length > 0) {
     document.getElementsByClassName('cart__item')[0].remove();
   }
+  localStorage.clear();
   });
 }
 
@@ -118,6 +130,7 @@ window.onload = function onload() {
   listagemItems().then(() => {
     attachButtonsEvents();
     removeElementoLoading();
+    geraLocalStorage();
   });
   apagaClicado();
   apagaTodos();

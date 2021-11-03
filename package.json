@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/betrybe/sd-0x-block10-project-shopping-cart/issues"
   },
-  "homepage": "https://github.com/betrybe/sd-0x-block10-project-shopping-cart#readme",
+  "homepage": "https://devwelljr.github.io/shopping-cart/",
   "dependencies": {
     "cypress": "4.3.0",
     "cypress-multi-reporters": "1.2.4",
